@@ -1,0 +1,7 @@
+CREATE TABLE installway (
+	proname VARCHAR(20) PRIMARY KEY,
+	lev1 VARCHAR(100),
+	lev2 VARCHAR(100),
+	lev3 VARCHAR(100),
+	lev4 VARCHAR(100),pj_javapj_java
+	lev5 VARCHAR(100));
