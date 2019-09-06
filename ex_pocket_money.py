@@ -15,7 +15,7 @@ p = int(input("파이썬 성적 입력 : "))
 jsp = int(input("JSP 성적 입력 : "))
 
 score = k + e + m + jv + p + jsp
-avg = score / 6
+avg = round(score / 6, 2)
 
 print("\n총점 :", score, "점\n평균 :", avg, "점")
 
