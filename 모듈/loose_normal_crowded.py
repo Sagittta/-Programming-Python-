@@ -4,11 +4,15 @@
 # 10 이상 20 미만 : 보통
 # 20 이상 : 혼잡
 
-while True:
-    in_person = int(input("탑승객 수는? "))
-    out_person = int(input("하차객 수는? "))
+sum = 0
 
-sum = in_person - out_person
+while True:
+    in_person = int(input("탑승객 수는? (-1: 끝) "))
+    if in_person == -1:
+        break
+    out_person = int(input("하차객 수는? "))
+    sum += in_person - out_person
+
 print("버스에 있는 사람 수는", sum, "명\n")
 
 if sum < 0:
