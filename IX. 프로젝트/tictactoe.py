@@ -10,8 +10,11 @@ class TicTacToe:
             # else:
             #     self.current_turn = "o"
             # 위 4문장과 같은 의미.
-            self.current_turn = (" X    " if self.current_turn == " O " else " O ")
+            self.current_turn = (" X " if self.current_turn == " O " else " O ")
             self.board[(row * 3) + col] = self.current_turn
+
+        else:
+            print("빈칸이 아니에요. 제대로 잘 입력해요 ^^")
 
     def get(self, row, col):
         return self.board[(row * 3) + col]
@@ -36,7 +39,7 @@ class TicTacToe:
             return check
 
         # 무승부
-        if not "." in self.board:
+        if not " - " in self.board:
             return "d"
 
     def __str__(self):
