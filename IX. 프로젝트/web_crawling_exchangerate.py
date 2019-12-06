@@ -3,18 +3,22 @@ from urllib.request import urlopen
 import json
 
 if __name__ == '__main__':
-    with urlopen("https://finance.naver.com/marketindex/?tabSel=exchange") as response:
+    # https://finance.naver.com/marketindex/?tabSel=exchange
+    # iframe 안으로 들어감
+    with urlopen("https://finance.naver.com/marketindex/exchangeList.nhn") as response:
         soup = BeautifulSoup(response, "lxml")
     # print(soup)
 
-    countries = soup.find_all("h3", attrs={"class": "h_lst"})
-    exchange_wons = soup.find_all("span", attrs={"class": "value"})
+    countries = soup.find_all("td", attrs={"class": "tit"})
+    exchange_wons = soup.find_all("td", attrs={"class": "sale"})
 
     a = []
     b = []
     count = 1
     for country in countries:
-        country = country.find("span").text
+        country = country.find("a").text
+        country = country.split()
+        country = country[0] + " " + country[1]
         # print(count, "나라 : ", country)
         a.append(country)
         count += 1
@@ -25,17 +29,4 @@ if __name__ == '__main__':
         b.append(exchange_won)
 
     for i in range(10):
-        print(a[i], ":", b[i])
-
-url_dict = {
-    '미국 USD': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_USDKRW',
-    '유럽연합 EUR': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_EURKRW',
-    '일본 JPY (100엔)': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_JPYKRW',
-    '중국 CNY': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_CNYKRW',
-    '홍콩 HKD': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_HKDKRW',
-    '대만 TWD': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_TWDKRW',
-    '영국 GBP': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_GBPKRW',
-    '오만 OMR': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_OMRKRW',
-    '캐나다 CAD': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_CADKRW',
-    '스위스 CHF': 'https://finance.naver.com/marketindex/exchangeDailyQuote.nhn?marketindexCd=FX_CHFKRW'
-}
+        print(a[i], ":", b[i], "원")
